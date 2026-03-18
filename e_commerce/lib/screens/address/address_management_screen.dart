@@ -201,7 +201,7 @@ class _AddressManagementScreenState extends State<AddressManagementScreen> {
                   const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
-                    height: 48,
+                    height: 52,
                     child: ElevatedButton(
                       onPressed: () async {
                         if (!formKey.currentState!.validate()) return;

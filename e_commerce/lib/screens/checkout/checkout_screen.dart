@@ -314,7 +314,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
       child: Consumer<OrderProvider>(
         builder: (ctx, order, _) => SizedBox(
-          height: 48,
+          height: 52,
           child: ElevatedButton(
             onPressed: order.isPlacing
                 ? null
@@ -404,7 +404,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
-                    height: 48,
+                    height: 52,
                     child: ElevatedButton(
                       onPressed: () async {
                         if (!formKey.currentState!.validate()) return;

@@ -275,7 +275,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     return Consumer<OrderProvider>(
       builder: (ctx, provider, _) => SizedBox(
         width: double.infinity,
-        height: 48,
+        height: 52,
         child: OutlinedButton(
           onPressed: () async {
             final confirm = await showDialog<bool>(

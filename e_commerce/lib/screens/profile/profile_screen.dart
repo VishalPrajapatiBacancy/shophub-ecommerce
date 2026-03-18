@@ -132,7 +132,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
-              height: 48,
+              height: 52,
               child: ElevatedButton(
                 onPressed: () => context.router.push(const SignInRoute()),
                 style: ElevatedButton.styleFrom(
@@ -146,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
-              height: 48,
+              height: 52,
               child: OutlinedButton(
                 onPressed: () => context.router.push(const SignUpRoute()),
                 style: OutlinedButton.styleFrom(

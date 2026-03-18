@@ -188,7 +188,7 @@ class _WishlistCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 SizedBox(
                   width: double.infinity,
-                  height: 34,
+                  height: 38,
                   child: Consumer<CartProvider>(
                     builder: (ctx, cart, _) {
                       final inCart = cart.hasItem(product.id);

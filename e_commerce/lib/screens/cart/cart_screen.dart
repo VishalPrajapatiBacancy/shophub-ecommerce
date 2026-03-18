@@ -116,7 +116,7 @@ class CartScreen extends StatelessWidget {
           const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,
-            height: 48,
+            height: 52,
             child: ElevatedButton(
               onPressed: () => context.router.push(const CheckoutRoute()),
               style: ElevatedButton.styleFrom(

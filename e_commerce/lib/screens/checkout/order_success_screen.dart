@@ -133,7 +133,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> with SingleTick
                   const SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
-                    height: 48,
+                    height: 52,
                     child: ElevatedButton(
                       onPressed: () => context.router.replace(const HomeRoute()),
                       style: ElevatedButton.styleFrom(
@@ -150,7 +150,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> with SingleTick
                   const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
-                    height: 48,
+                    height: 52,
                     child: OutlinedButton(
                       onPressed: () => context.router.push(OrderDetailRoute(orderId: widget.orderId)),
                       style: OutlinedButton.styleFrom(
