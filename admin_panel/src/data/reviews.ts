@@ -1,0 +1,14 @@
+import type { Review } from '@/types';
+
+export const reviews: Review[] = [
+  { id: 'r1', productId: 'p1', productName: 'Wireless Bluetooth Headphones', customer: { id: 'cu1', name: 'John Smith' }, rating: 5, title: 'Amazing sound quality!', comment: 'Best headphones I have ever owned. The noise cancellation is outstanding.', status: 'approved', createdAt: '2024-03-01T10:00:00Z' },
+  { id: 'r2', productId: 'p2', productName: 'Smart Watch Pro', customer: { id: 'cu2', name: 'Sarah Johnson' }, rating: 4, title: 'Great features', comment: 'Love the health monitoring features. Battery life could be better.', status: 'approved', createdAt: '2024-03-03T14:00:00Z' },
+  { id: 'r3', productId: 'p4', productName: 'Running Shoes Ultra', customer: { id: 'cu9', name: 'Chris Anderson' }, rating: 5, title: 'Perfect for running', comment: 'Super lightweight and comfortable. Best running shoes ever!', status: 'approved', createdAt: '2024-03-05T09:00:00Z' },
+  { id: 'r4', productId: 'p3', productName: 'Organic Cotton T-Shirt', customer: { id: 'cu3', name: 'Mike Williams' }, rating: 3, title: 'Good but shrinks', comment: 'Nice fabric but shrunk after first wash. Order a size up.', status: 'approved', createdAt: '2024-03-07T11:00:00Z' },
+  { id: 'r5', productId: 'p15', productName: 'Mechanical Keyboard RGB', customer: { id: 'cu5', name: 'David Lee' }, rating: 5, title: 'Best keyboard ever!', comment: 'Cherry MX switches feel amazing. RGB lighting is beautiful.', status: 'approved', createdAt: '2024-03-08T16:00:00Z' },
+  { id: 'r6', productId: 'p18', productName: 'Bluetooth Speaker Mini', customer: { id: 'cu10', name: 'Amanda White' }, rating: 1, title: 'Stopped working', comment: 'Speaker stopped working after 2 weeks. Very disappointed.', status: 'pending', createdAt: '2024-03-10T08:00:00Z' },
+  { id: 'r7', productId: 'p14', productName: 'Scented Candle Collection', customer: { id: 'cu6', name: 'Lisa Chen' }, rating: 5, title: 'Wonderful scents', comment: 'All three candles smell amazing. Burns evenly and lasts long.', status: 'approved', createdAt: '2024-03-11T13:00:00Z' },
+  { id: 'r8', productId: 'p5', productName: 'Laptop Stand Adjustable', customer: { id: 'cu8', name: 'Jennifer Martinez' }, rating: 4, title: 'Sturdy and practical', comment: 'Good quality stand. Easy to adjust. Wish it had cable management.', status: 'pending', createdAt: '2024-03-12T10:00:00Z' },
+  { id: 'r9', productId: 'p9', productName: 'Leather Wallet Slim', customer: { id: 'cu4', name: 'Emily Brown' }, rating: 2, title: 'Too small', comment: 'Way too small for my cards. The RFID blocking is nice though.', status: 'rejected', createdAt: '2024-03-13T07:00:00Z' },
+  { id: 'r10', productId: 'p13', productName: 'Backpack Travel 40L', customer: { id: 'cu7', name: 'Robert Taylor' }, rating: 4, title: 'Great for travel', comment: 'Spacious and well-organized. Comfortable to carry for long periods.', status: 'pending', createdAt: '2024-03-13T11:00:00Z' },
+];

@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+build/
+dist/
+.next/
+out/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Flutter/Dart
+e_commerce/.dart_tool/
+e_commerce/.packages
+e_commerce/build/
+e_commerce/.flutter-plugins
+e_commerce/.flutter-plugins-dependencies
+e_commerce/android/.gradle/
+e_commerce/android/local.properties
+e_commerce/ios/Pods/
+e_commerce/ios/.symlinks/
+e_commerce/.pub-cache/
+e_commerce/pubspec.lock
+
+# Admin Panel
+admin_panel/node_modules/
+admin_panel/dist/
+
+# Backend
+backend/node_modules/
+
+# Claude
+.claude/
+
+# Logs
+*.log
+npm-debug.log*
