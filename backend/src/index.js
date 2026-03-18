@@ -52,18 +52,20 @@ app.use('/api', routes);
 app.use(notFound);
 app.use(errorHandler);
 
-// Start server
+// Start server (only in non-serverless environments)
 const PORT = config.port;
 
-app.listen(PORT, '0.0.0.0', async () => {
-  await runMigrations();
-  console.log(`
+if (!process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', async () => {
+    await runMigrations();
+    console.log(`
     ╔═══════════════════════════════════════╗
     ║  Server running in ${config.nodeEnv} mode  ║
     ║  Port: ${PORT}                         ║
     ║  URL: http://localhost:${PORT}         ║
     ╚═══════════════════════════════════════╝
-  `);
-});
+    `);
+  });
+}
 
 export default app;
