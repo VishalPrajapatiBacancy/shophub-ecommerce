@@ -49,7 +49,7 @@ export interface Order {
   shipping: number;
   discount: number;
   total: number;
-  status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'returned' | 'refunded';
+  status: 'placed' | 'confirmed' | 'packed' | 'processing' | 'shipped' | 'out_for_delivery' | 'delivered' | 'cancelled' | 'returned' | 'refunded';
   paymentMethod: string;
   paymentStatus: 'paid' | 'pending' | 'failed' | 'refunded';
   shippingAddress: Address;
@@ -173,6 +173,42 @@ export interface PaginatedResponse<T> {
   page: number;
   limit: number;
   totalPages: number;
+}
+
+export interface Vendor {
+  id: string;
+  storeName: string;
+  slug: string;
+  description?: string;
+  logoUrl?: string;
+  bannerUrl?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  address?: Record<string, string>;
+  commissionRate: number;
+  status: 'pending' | 'active' | 'suspended' | 'rejected';
+  totalRevenue: number;
+  totalOrders: number;
+  rating: number;
+  bankAccount?: Record<string, string>;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VendorPayout {
+  id: string;
+  vendorId: string;
+  vendors?: { storeName: string };
+  amount: number;
+  status: 'pending' | 'processing' | 'paid' | 'failed';
+  periodStart?: string;
+  periodEnd?: string;
+  ordersCount: number;
+  transactionId?: string;
+  paidAt?: string;
+  notes?: string;
+  createdAt: string;
 }
 
 export interface Notification {

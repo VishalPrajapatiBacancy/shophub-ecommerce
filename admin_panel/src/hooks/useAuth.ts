@@ -30,7 +30,7 @@ export function useAuth() {
         setIsLoading(false);
         return { success: false, error: 'Invalid response from server' };
       }
-      if (data.role !== 'admin') {
+      if (!['admin', 'vendor'].includes(data.role)) {
         setIsLoading(false);
         return { success: false, error: 'Access denied. Admin role required.' };
       }

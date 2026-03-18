@@ -8,10 +8,11 @@ interface SidebarProps {
   isMobileOpen: boolean;
   onToggle: () => void;
   onCloseMobile: () => void;
+  userRole?: string;
 }
 
-export function Sidebar({ isCollapsed, isMobileOpen, onToggle, onCloseMobile }: SidebarProps) {
-  const navGroups = getNavGroups();
+export function Sidebar({ isCollapsed, isMobileOpen, onToggle, onCloseMobile, userRole = 'admin' }: SidebarProps) {
+  const navGroups = getNavGroups(userRole);
 
   const sidebarContent = (
     <div className="flex h-full flex-col">

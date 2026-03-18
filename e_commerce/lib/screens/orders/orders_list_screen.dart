@@ -56,28 +56,36 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
           if (provider.isLoading && provider.orders.isEmpty) {
             return const Center(child: CircularProgressIndicator(color: AppColors.primary));
           }
-          if (provider.orders.isEmpty) {
-            return _buildEmpty(ctx);
-          }
           return RefreshIndicator(
             onRefresh: () => provider.loadOrders(refresh: true),
-            child: ListView.separated(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(12),
-              itemCount: provider.orders.length + (provider.isLoading ? 1 : 0),
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemBuilder: (_, i) {
-                if (i >= provider.orders.length) {
-                  return const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: CircularProgressIndicator(color: AppColors.primary),
-                    ),
-                  );
-                }
-                return _OrderCard(order: provider.orders[i]);
-              },
-            ),
+            child: provider.orders.isEmpty
+                ? ListView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(ctx).size.height * 0.7,
+                        child: _buildEmpty(ctx),
+                      ),
+                    ],
+                  )
+                : ListView.separated(
+                    controller: _scrollController,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(12),
+                    itemCount: provider.orders.length + (provider.isLoading ? 1 : 0),
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (_, i) {
+                      if (i >= provider.orders.length) {
+                        return const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: CircularProgressIndicator(color: AppColors.primary),
+                          ),
+                        );
+                      }
+                      return _OrderCard(order: provider.orders[i]);
+                    },
+                  ),
           );
         },
       ),
@@ -197,25 +205,28 @@ class _OrderCard extends StatelessWidget {
 
   Color _statusColor(String status) {
     switch (status.toLowerCase()) {
-      case 'placed':
-        return AppColors.primary;
-      case 'confirmed':
-        return Colors.indigo;
-      case 'processing':
-        return AppColors.warning;
-      case 'shipped':
-        return Colors.purple;
-      case 'delivered':
-        return AppColors.success;
-      case 'cancelled':
-        return AppColors.error;
-      default:
-        return AppColors.onSurfaceVariant;
+      case 'placed':        return AppColors.primary;
+      case 'confirmed':     return Colors.indigo;
+      case 'packed':        return Colors.teal;
+      case 'processing':    return AppColors.warning;
+      case 'shipped':       return Colors.purple;
+      case 'out_for_delivery': return Colors.deepOrange;
+      case 'delivered':     return AppColors.success;
+      case 'cancelled':     return AppColors.error;
+      case 'returned':      return Colors.orange;
+      case 'refunded':      return Colors.brown;
+      default:              return AppColors.onSurfaceVariant;
     }
   }
 
   String _statusLabel(String status) {
-    return status[0].toUpperCase() + status.substring(1);
+    const labels = {
+      'placed': 'Placed', 'confirmed': 'Confirmed', 'packed': 'Packed',
+      'processing': 'Processing', 'shipped': 'Shipped',
+      'out_for_delivery': 'Out for Delivery', 'delivered': 'Delivered',
+      'cancelled': 'Cancelled', 'returned': 'Returned', 'refunded': 'Refunded',
+    };
+    return labels[status.toLowerCase()] ?? (status[0].toUpperCase() + status.substring(1));
   }
 
   String _formatDate(DateTime dt) {

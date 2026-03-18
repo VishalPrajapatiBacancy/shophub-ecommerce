@@ -16,6 +16,8 @@ import '../../screens/profile/profile_screen.dart';
 import '../../screens/search/search_screen.dart';
 import '../../screens/address/address_management_screen.dart';
 import '../../screens/categories/categories_screen.dart';
+import '../../screens/vendors/vendors_screen.dart';
+import '../../screens/vendors/vendor_detail_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -54,5 +56,9 @@ class AppRouter extends RootStackRouter {
         // Search & Categories
         AutoRoute(page: SearchRoute.page, path: '/search'),
         AutoRoute(page: CategoriesRoute.page, path: '/categories'),
+
+        // Vendors
+        AutoRoute(page: VendorsRoute.page, path: '/vendors'),
+        AutoRoute(page: VendorDetailRoute.page, path: '/vendors/:vendorId'),
       ];
 }

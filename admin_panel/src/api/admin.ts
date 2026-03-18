@@ -13,6 +13,8 @@ import type {
   Brand,
   Coupon,
   Review,
+  Vendor,
+  VendorPayout,
 } from '@/types';
 
 const BASE = '/admin';
@@ -263,6 +265,48 @@ export const adminApi = {
   },
   deleteBanner(id: string): Promise<{ success: boolean }> {
     return apiClient.delete(`${BASE}/banners/${id}`);
+  },
+
+  // ─── Vendors ──────────────────────────────────────────────────────────────
+  getMyVendorProfile(): Promise<{ success: boolean; data: Vendor }> {
+    return apiClient.get(`${BASE}/vendors/me`);
+  },
+  updateMyVendorProfile(body: Partial<Vendor>): Promise<{ success: boolean; data: Vendor }> {
+    return apiClient.put(`${BASE}/vendors/me`, body);
+  },
+  getVendors(params?: ApiListParams): Promise<{ success: boolean; data: Vendor[]; total: number; page: number; limit: number; totalPages: number }> {
+    return apiClient.get(`${BASE}/vendors`, { params: buildParams(params) });
+  },
+  getVendor(id: string): Promise<{ success: boolean; data: Vendor }> {
+    return apiClient.get(`${BASE}/vendors/${id}`);
+  },
+  createVendor(body: Partial<Vendor>): Promise<{ success: boolean; data: Vendor }> {
+    return apiClient.post(`${BASE}/vendors`, body);
+  },
+  updateVendor(id: string, body: Partial<Vendor>): Promise<{ success: boolean; data: Vendor }> {
+    return apiClient.put(`${BASE}/vendors/${id}`, body);
+  },
+  deleteVendor(id: string): Promise<{ success: boolean }> {
+    return apiClient.delete(`${BASE}/vendors/${id}`);
+  },
+  updateVendorStatus(id: string, status: string): Promise<{ success: boolean; data: Vendor }> {
+    return apiClient.patch(`${BASE}/vendors/${id}/status`, { status });
+  },
+  getVendorProducts(id: string, params?: ApiListParams): Promise<{ success: boolean; data: Product[]; total: number; page: number; limit: number; totalPages: number }> {
+    return apiClient.get(`${BASE}/vendors/${id}/products`, { params: buildParams(params) });
+  },
+
+  // ─── Vendor Payouts ───────────────────────────────────────────────────────
+  getVendorPayouts(params?: ApiListParams & { vendorId?: string }): Promise<{ success: boolean; data: VendorPayout[]; total: number; page: number; limit: number; totalPages: number }> {
+    const p = buildParams(params);
+    if (params?.vendorId) p.vendorId = params.vendorId;
+    return apiClient.get(`${BASE}/vendor-payouts`, { params: p });
+  },
+  createVendorPayout(body: { vendorId: string; amount: number; periodStart?: string; periodEnd?: string; ordersCount?: number; notes?: string }): Promise<{ success: boolean; data: VendorPayout }> {
+    return apiClient.post(`${BASE}/vendor-payouts`, body);
+  },
+  updatePayoutStatus(id: string, status: string, transactionId?: string): Promise<{ success: boolean; data: VendorPayout }> {
+    return apiClient.patch(`${BASE}/vendor-payouts/${id}/status`, { status, transactionId });
   },
 
   // ─── Image Upload ─────────────────────────────────────────────────────────

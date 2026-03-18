@@ -118,9 +118,26 @@ export const getOrderById = async (req, res) => {
   }
 };
 
+const VALID_ORDER_STATUSES = [
+  'placed', 'confirmed', 'packed', 'processing',
+  'shipped', 'out_for_delivery', 'delivered',
+  'cancelled', 'returned', 'refunded',
+];
+
 export const updateOrderStatus = async (req, res) => {
   try {
     const { status, trackingNumber } = req.body;
+
+    if (!status && !trackingNumber) {
+      return res.status(400).json({ success: false, message: 'status or trackingNumber is required' });
+    }
+    if (status !== undefined && !VALID_ORDER_STATUSES.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid status "${status}". Allowed: ${VALID_ORDER_STATUSES.join(', ')}`,
+      });
+    }
+
     const updates = {};
     if (status !== undefined) updates.status = status;
     if (trackingNumber !== undefined) updates.tracking_number = trackingNumber;

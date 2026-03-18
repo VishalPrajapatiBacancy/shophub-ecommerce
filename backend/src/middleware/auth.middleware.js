@@ -40,7 +40,8 @@ export const protect = async (req, res, next) => {
     // Auto-create profile if missing (e.g. first login after auth creation)
     if (!profile) {
       const meta = user.user_metadata || {};
-      const role = (meta.role === 'admin') ? 'admin' : 'customer';
+      const allowedRoles = ['admin', 'vendor'];
+      const role = allowedRoles.includes(meta.role) ? meta.role : 'customer';
       const { data: created } = await supabase.from('users').upsert({
         id: user.id,
         name: meta.name || user.email.split('@')[0],
@@ -70,11 +71,11 @@ export const protect = async (req, res, next) => {
   }
 };
 
-// Admin role check middleware
+// Admin/Vendor role check middleware
 export const admin = (req, res, next) => {
-  if (req.user && req.user.role === 'admin') {
+  if (req.user && (req.user.role === 'admin' || req.user.role === 'vendor')) {
     next();
   } else {
-    res.status(403).json({ success: false, message: 'Not authorized as admin' });
+    res.status(403).json({ success: false, message: 'Access denied. Admin role required' });
   }
 };

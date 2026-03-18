@@ -218,7 +218,7 @@ class _AddressManagementScreenState extends State<AddressManagementScreen> {
                         );
                         try {
                           if (isEditing) {
-                            final updated = await _service.updateAddress(address!.id, model);
+                            final updated = await _service.updateAddress(address.id, model);
                             if (!mounted) return;
                             Navigator.pop(ctx);
                             final idx = _addresses.indexWhere((a) => a.id == address.id);

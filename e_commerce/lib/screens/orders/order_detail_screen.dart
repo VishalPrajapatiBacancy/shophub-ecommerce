@@ -23,7 +23,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   OrderModel? _order;
   bool _loading = true;
 
-  static const _steps = ['placed', 'confirmed', 'processing', 'shipped', 'delivered'];
+  static const _steps = ['placed', 'confirmed', 'packed', 'processing', 'shipped', 'out_for_delivery', 'delivered'];
 
   @override
   void initState() {
@@ -312,14 +312,16 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   }
 
   String _stepLabel(String s) {
-    switch (s) {
-      case 'placed': return 'Order Placed';
-      case 'confirmed': return 'Order Confirmed';
-      case 'processing': return 'Processing';
-      case 'shipped': return 'Shipped';
-      case 'delivered': return 'Delivered';
-      default: return s[0].toUpperCase() + s.substring(1);
-    }
+    const labels = {
+      'placed': 'Order Placed',
+      'confirmed': 'Confirmed',
+      'packed': 'Packed',
+      'processing': 'Processing',
+      'shipped': 'Shipped',
+      'out_for_delivery': 'Out for Delivery',
+      'delivered': 'Delivered',
+    };
+    return labels[s] ?? (s[0].toUpperCase() + s.substring(1));
   }
 
   IconData _paymentIcon(String method) {

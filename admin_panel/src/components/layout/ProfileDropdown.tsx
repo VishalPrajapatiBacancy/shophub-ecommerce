@@ -33,12 +33,14 @@ export function ProfileDropdown() {
         <p className="text-sm font-medium text-gray-900">{user.name}</p>
         <p className="text-xs text-gray-500">{user.email}</p>
       </div>
-      <DropdownItem onClick={() => navigate('/settings')}>
+      <DropdownItem onClick={() => navigate('/profile')}>
         <User className="h-4 w-4" /> My Profile
       </DropdownItem>
-      <DropdownItem onClick={() => navigate('/settings')}>
-        <Settings className="h-4 w-4" /> Settings
-      </DropdownItem>
+      {user.role === 'admin' && (
+        <DropdownItem onClick={() => navigate('/settings')}>
+          <Settings className="h-4 w-4" /> Settings
+        </DropdownItem>
+      )}
       <DropdownDivider />
       <DropdownItem onClick={handleLogout} danger>
         <LogOut className="h-4 w-4" /> Logout

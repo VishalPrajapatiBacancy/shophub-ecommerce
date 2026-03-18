@@ -31,6 +31,7 @@ import {
 } from '../controllers/public/address.controller.js';
 import { validateCoupon } from '../controllers/public/coupon.controller.js';
 import { getProductReviews, submitReview } from '../controllers/public/review.controller.js';
+import { listVendors, getVendorByIdOrSlug, getVendorProducts } from '../controllers/public/vendor.controller.js';
 
 const router = express.Router();
 
@@ -75,5 +76,10 @@ router.post('/coupons/validate', validateCoupon);
 // ─── Reviews ──────────────────────────────────────────────────────────────────
 router.get('/products/:productId/reviews', getProductReviews);
 router.post('/products/:productId/reviews', protect, submitReview);
+
+// ─── Vendors (public) ─────────────────────────────────────────────────────────
+router.get('/vendors', listVendors);
+router.get('/vendors/:idOrSlug/products', getVendorProducts);
+router.get('/vendors/:idOrSlug', getVendorByIdOrSlug);
 
 export default router;

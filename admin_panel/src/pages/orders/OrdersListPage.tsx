@@ -18,16 +18,24 @@ import { formatCurrency, formatDate } from '@/lib/utils';
 import type { Order } from '@/types';
 
 const statusTabs = [
-  { label: 'All', value: 'all' },
-  { label: 'Pending', value: 'pending' },
-  { label: 'Confirmed', value: 'confirmed' },
-  { label: 'Processing', value: 'processing' },
-  { label: 'Shipped', value: 'shipped' },
-  { label: 'Delivered', value: 'delivered' },
-  { label: 'Cancelled', value: 'cancelled' },
+  { label: 'All',              value: 'all' },
+  { label: 'Placed',           value: 'placed' },
+  { label: 'Confirmed',        value: 'confirmed' },
+  { label: 'Packed',           value: 'packed' },
+  { label: 'Processing',       value: 'processing' },
+  { label: 'Shipped',          value: 'shipped' },
+  { label: 'Out for Delivery', value: 'out_for_delivery' },
+  { label: 'Delivered',        value: 'delivered' },
+  { label: 'Cancelled',        value: 'cancelled' },
+  { label: 'Returned',         value: 'returned' },
+  { label: 'Refunded',         value: 'refunded' },
 ];
 
-const ORDER_STATUSES = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled', 'returned', 'refunded'];
+const ORDER_STATUSES = [
+  'placed', 'confirmed', 'packed', 'processing',
+  'shipped', 'out_for_delivery', 'delivered',
+  'cancelled', 'returned', 'refunded',
+];
 
 export function OrdersListPage() {
   const [search, setSearch] = useState('');

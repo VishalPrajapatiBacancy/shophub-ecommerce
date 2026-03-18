@@ -94,7 +94,8 @@ export const loginUser = async (req, res) => {
     if (!profile) {
       const meta = data.user.user_metadata || {};
       // Try full upsert, fall back to minimal if columns missing
-      const role = (meta.role === 'admin') ? 'admin' : 'customer';
+      const allowedRoles = ['admin', 'vendor'];
+      const role = allowedRoles.includes(meta.role) ? meta.role : 'customer';
       const { error: upErr } = await supabase.from('users').upsert({
         id: userId,
         name: meta.name || email.split('@')[0],

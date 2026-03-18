@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { RootLayout } from '@/components/layout/RootLayout';
+import { RouteErrorBoundary } from '@/components/ErrorBoundary';
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage';
 import { DashboardPage } from '@/pages/dashboard/DashboardPage';
@@ -20,6 +21,8 @@ import { RolesPage } from '@/pages/roles/RolesPage';
 import { SupportPage } from '@/pages/support/SupportPage';
 import { SettingsPage } from '@/pages/settings/SettingsPage';
 import { BannersPage } from '@/pages/banners/BannersPage';
+import { VendorsListPage } from '@/pages/vendors/VendorsListPage';
+import { ProfilePage } from '@/pages/profile/ProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +36,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <RouteErrorBoundary />,
     children: [
       { index: true, element: <DashboardPage /> },
       { path: 'products', element: <ProductsListPage /> },
@@ -52,6 +56,8 @@ export const router = createBrowserRouter([
       { path: 'support', element: <SupportPage /> },
       { path: 'settings', element: <SettingsPage /> },
       { path: 'banners', element: <BannersPage /> },
+      { path: 'vendors', element: <VendorsListPage /> },
+      { path: 'profile', element: <ProfilePage /> },
     ],
   },
 ]);

@@ -221,7 +221,7 @@ export const getOrders = async (req, res) => {
     const { data: orders, error, count } = await supabase
       .from('orders')
       .select(
-        'id, order_number, status, payment_method, payment_status, total, subtotal, discount, shipping, tax, created_at, updated_at, tracking_number',
+        'id, order_number, status, payment_method, payment_status, total, subtotal, discount, shipping, tax, created_at, updated_at, tracking_number, order_items ( id, product_id, quantity, price, total_price )',
         { count: 'exact' }
       )
       .eq('user_id', userId)
@@ -246,6 +246,13 @@ export const getOrders = async (req, res) => {
       trackingNumber: o.tracking_number,
       createdAt: o.created_at,
       updatedAt: o.updated_at,
+      items: (o.order_items || []).map((item) => ({
+        id: item.id,
+        productId: item.product_id,
+        quantity: item.quantity,
+        price: item.price,
+        totalPrice: item.total_price,
+      })),
     }));
 
     return res.json({

@@ -4,14 +4,23 @@ import { useSidebar } from '@/hooks/useSidebar';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { cn } from '@/lib/utils';
+import { navigation } from '@/config/navigation';
 
 export function RootLayout() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const location = useLocation();
   const { isCollapsed, isMobileOpen, toggle, toggleMobile, closeMobile } = useSidebar();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  const userRole = user?.role ?? 'customer';
+
+  // If vendor tries to access an admin-only route, redirect to /vendors
+  const currentNav = navigation.find(n => n.path === location.pathname);
+  if (currentNav && !currentNav.roles.includes(userRole)) {
+    return <Navigate to="/vendors" replace />;
   }
 
   return (
@@ -21,6 +30,7 @@ export function RootLayout() {
         isMobileOpen={isMobileOpen}
         onToggle={toggle}
         onCloseMobile={closeMobile}
+        userRole={userRole}
       />
       <div className={cn('transition-all duration-300', isCollapsed ? 'md:ml-20' : 'md:ml-64')}>
         <Header isCollapsed={isCollapsed} onToggleMobile={toggleMobile} />

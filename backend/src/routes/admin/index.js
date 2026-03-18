@@ -19,6 +19,7 @@ import * as supportController from '../../controllers/admin/support.controller.j
 import * as settingsController from '../../controllers/admin/settings.controller.js';
 import * as uploadController from '../../controllers/admin/upload.controller.js';
 import * as bannerController from '../../controllers/admin/banner.controller.js';
+import * as vendorController from '../../controllers/admin/vendor.controller.js';
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 } });
 
@@ -114,6 +115,22 @@ router.get('/banners/:id', bannerController.getBannerById);
 router.post('/banners', bannerController.createBanner);
 router.put('/banners/:id', bannerController.updateBanner);
 router.delete('/banners/:id', bannerController.deleteBanner);
+
+// Vendors
+router.get('/vendors/me', vendorController.getMyVendorProfile);
+router.put('/vendors/me', vendorController.updateMyVendorProfile);
+router.get('/vendors', vendorController.listVendors);
+router.get('/vendors/:id', vendorController.getVendorById);
+router.post('/vendors', vendorController.createVendor);
+router.put('/vendors/:id', vendorController.updateVendor);
+router.delete('/vendors/:id', vendorController.deleteVendor);
+router.patch('/vendors/:id/status', vendorController.updateVendorStatus);
+router.get('/vendors/:id/products', vendorController.getVendorProducts);
+
+// Vendor Payouts
+router.get('/vendor-payouts', vendorController.listPayouts);
+router.post('/vendor-payouts', vendorController.createPayout);
+router.patch('/vendor-payouts/:id/status', vendorController.updatePayoutStatus);
 
 // Image Upload
 router.post('/upload', upload.single('file'), uploadController.uploadImage);
