@@ -88,7 +88,7 @@ export function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@shophub.com"
+                placeholder="Enter your email"
                 error={errors.email?.message}
                 {...register('email')}
               />
@@ -136,11 +136,6 @@ export function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-6 p-4 rounded-lg bg-gray-50 border border-border">
-            <p className="text-xs font-medium text-gray-500 mb-1">Demo Credentials</p>
-            <p className="text-sm text-gray-700">Email: admin@shophub.com</p>
-            <p className="text-sm text-gray-700">Password: admin123</p>
-          </div>
         </div>
       </div>
     </div>
